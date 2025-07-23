@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía | Proyecto Puentes Culturales y de Conocimiento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Palette: Brilliant Blues -->
+    <!-- NEITHER Mermaid JS NOR SVG were used in this file. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1px;
+            top: 2rem;
+            bottom: -2rem;
+            width: 2px;
+            background-color: #5BC0F8;
+        }
+        .timeline-item:last-child::before {
+            display: none;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -9px;
+            top: 2rem;
+            height: 20px;
+            width: 20px;
+            background-color: #0041C2;
+            border-radius: 50%;
+            border: 4px solid #F0F8FF;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-12 md:mb-20">
+            <h1 class="text-4xl md:text-6xl font-black text-[#0041C2] uppercase tracking-wide">Puentes Culturales y de Conocimiento</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Una propuesta de cooperación intergeneracional entre la <strong>Universidad de Miami</strong> y <strong>España</strong>, con el aval del <strong>Consulado General de España en Miami</strong>.</p>
+        </header>
+
+        <section class="mb-16 md:mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#0081C9]">Tres Pilares del Conocimiento</h2>
+                <p class="mt-2 text-gray-600">El programa se estructura en tres áreas temáticas fundamentales, creando un ecosistema de aprendizaje multidisciplinar.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center border-t-4 border-[#0041C2]">
+                    <span class="text-5xl">🎨</span>
+                    <h3 class="text-2xl font-bold mt-4 mb-2">Arte y Cultura</h3>
+                    <p class="text-gray-600">Dirigido por el <strong>Dr. Miguel García</strong>, se explorará la riqueza del patrimonio español e hispanoamericano a través de seminarios, talleres y eventos culturales.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center border-t-4 border-[#0081C9]">
+                     <span class="text-5xl">❤️</span>
+                    <h3 class="text-2xl font-bold mt-4 mb-2">Medicina y Calidad de Vida</h3>
+                    <p class="text-gray-600">Liderado por la <strong>Dra. Johanna Barón Sánchez</strong>, se abordarán avances en salud, bienestar y envejecimiento activo mediante foros y proyectos aplicados.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center border-t-4 border-[#5BC0F8]">
+                    <span class="text-5xl">🏛️</span>
+                    <h3 class="text-2xl font-bold mt-4 mb-2">Liderazgo y Política</h3>
+                    <p class="text-gray-600">Bajo la dirección del <strong>Dr. David Díaz Barón</strong>, se fomentará el pensamiento crítico sobre gobernanza, diplomacia y políticas públicas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-xl p-6 md:p-10 mb-16 md:mb-24">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#0081C9] mb-4">Estructura y Gobernanza</h2>
+                    <p class="text-gray-600 mb-6">El programa cuenta con una estructura de dirección clara para garantizar la coherencia y el éxito. El Consulado General de España ejerce la dirección general, supervisando las tres áreas académicas coordinadas por sus respectivos directores expertos, en colaboración directa con la Universidad de Miami.</p>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-blue-100 border-l-4 border-[#0041C2] rounded-r-lg">
+                            <h4 class="font-bold text-[#0041C2]">DIRECCIÓN GENERAL</h4>
+                            <p class="text-gray-700">Consulado General de España en Miami</p>
+                        </div>
+                        <div class="ml-8 relative">
+                            <div class="border-l-2 border-dashed border-gray-400 absolute h-full left-4"></div>
+                            <div class="flex items-start mb-4">
+                               <div class="w-8 h-8 rounded-full bg-[#0081C9] text-white flex items-center justify-center font-bold absolute left-[-15px] top-0 z-10">1</div>
+                                <p class="ml-8 p-3 bg-gray-100 rounded-lg"><strong>Área de Arte y Cultura</strong> (Dr. M. García)</p>
+                            </div>
+                            <div class="flex items-start mb-4">
+                                <div class="w-8 h-8 rounded-full bg-[#0081C9] text-white flex items-center justify-center font-bold absolute left-[-15px] top-16 z-10">2</div>
+                                <p class="ml-8 p-3 bg-gray-100 rounded-lg"><strong>Área de Medicina y Calidad de Vida</strong> (Dra. J. Barón)</p>
+                            </div>
+                            <div class="flex items-start">
+                               <div class="w-8 h-8 rounded-full bg-[#0081C9] text-white flex items-center justify-center font-bold absolute left-[-15px] top-32 z-10">3</div>
+                                <p class="ml-8 p-3 bg-gray-100 rounded-lg"><strong>Área de Liderazgo y Política</strong> (Dr. D. Díaz)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center justify-center">
+                    <h3 class="text-2xl font-bold text-center mb-4">Composición del Programa</h3>
+                    <div class="chart-container">
+                        <canvas id="programAreasChart"></canvas>
+                    </div>
+                     <p class="text-center text-gray-600 mt-4">Una distribución equitativa de los recursos y el enfoque entre las tres áreas temáticas clave del programa.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16 md:mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#0081C9]">Hoja de Ruta del Proyecto</h2>
+                <p class="mt-2 text-gray-600">Un calendario estructurado en cuatro fases para asegurar una implementación exitosa desde la planificación hasta la expansión.</p>
+            </div>
+            <div class="relative pl-8">
+                <div class="timeline-item relative pb-8">
+                    <div class="timeline-dot"></div>
+                    <h3 class="text-xl font-bold text-[#0041C2]">Fase 1: Planificación y Diseño</h3>
+                    <p class="text-gray-500 font-semibold mb-2">Julio - Septiembre 2025</p>
+                    <p class="text-gray-700">Reuniones de formalización, conformación de equipos de trabajo y diseño curricular detallado.</p>
+                </div>
+                <div class="timeline-item relative pb-8">
+                    <div class="timeline-dot"></div>
+                    <h3 class="text-xl font-bold text-[#0041C2]">Fase 2: Lanzamiento y Convocatoria</h3>
+                    <p class="text-gray-500 font-semibold mb-2">Octubre - Noviembre 2025</p>
+                    <p class="text-gray-700">Presentación oficial del programa y apertura del proceso de inscripción y selección de participantes.</p>
+                </div>
+                <div class="timeline-item relative pb-8">
+                    <div class="timeline-dot"></div>
+                    <h3 class="text-xl font-bold text-[#0041C2]">Fase 3: Implementación Piloto</h3>
+                    <p class="text-gray-500 font-semibold mb-2">Enero - Mayo 2026</p>
+                    <p class="text-gray-700">Inicio y desarrollo de las actividades académicas. Seguimiento continuo y evaluación intermedia del impacto.</p>
+                </div>
+                <div class="timeline-item relative">
+                    <div class="timeline-dot"></div>
+                    <h3 class="text-xl font-bold text-[#0041C2]">Fase 4: Evaluación y Expansión</h3>
+                    <p class="text-gray-500 font-semibold mb-2">Junio 2026 en adelante</p>
+                    <p class="text-gray-700">Análisis de resultados, informe final y planificación de la consolidación y expansión del programa.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-xl p-6 md:p-10 mb-16 md:mb-24">
+             <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#0081C9]">Estrategia de Financiación Diversificada</h2>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">La sostenibilidad del programa se basa en una combinación de fuentes de financiación públicas y privadas, asegurando su viabilidad a largo plazo.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                 <div>
+                    <div class="chart-container" style="max-width: 600px; height: 400px;">
+                        <canvas id="fundingChart"></canvas>
+                    </div>
+                 </div>
+                 <div class="text-gray-700 space-y-4">
+                    <div>
+                        <h4 class="font-bold text-[#0041C2]">1. Aportaciones Institucionales</h4>
+                        <p class="ml-4">Fondos y recursos en especie del Consulado, la Universidad de Miami, y agencias gubernamentales.</p>
+                    </div>
+                     <div>
+                        <h4 class="font-bold text-[#0081C9]">2. Patrocinios y Colaboraciones Privadas</h4>
+                        <p class="ml-4">Apoyo de empresas, fundaciones y donantes individuales interesados en la responsabilidad social y cultural.</p>
+                    </div>
+                     <div>
+                        <h4 class="font-bold text-[#5BC0F8]">3. Ingresos del Programa</h4>
+                        <p class="ml-4">Cuotas de inscripción diferenciadas y fondos para becas que garantizan la accesibilidad y la inclusión.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#0081C9]">Un Programa para Todas las Generaciones</h2>
+            <p class="mt-2 mb-8 text-gray-600 max-w-2xl mx-auto">Buscamos crear una comunidad de aprendizaje diversa, fomentando el diálogo entre estudiantes, profesionales y jubilados.</p>
+             <div class="chart-container mx-auto" style="height: 350px;">
+                <canvas id="audienceChart"></canvas>
+            </div>
+             <p class="text-center text-gray-600 mt-4">Distribución estimada de participantes para maximizar el intercambio de experiencias y conocimientos intergeneracionales.</p>
+        </section>
+        
+    </main>
+
+    <footer class="text-center p-6 bg-gray-800 text-white mt-12">
+        <p>&copy; 2025 | Proyecto Puentes Culturales y de Conocimiento</p>
+    </footer>
+
+    <script>
+        function wrapText(str) {
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = '';
+            const maxLen = 16;
+
+            for (let i = 0; i < words.length; i++) {
+                const word = words[i];
+                if ((currentLine + word).length > maxLen && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            if (currentLine.length > 0) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        const commonTooltipOptions = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        };
+        
+        window.onload = function() {
+            const brilliantBlues = ['#0041C2', '#0081C9', '#5BC0F8'];
+
+            const programAreasCtx = document.getElementById('programAreasChart').getContext('2d');
+            new Chart(programAreasCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Arte y Cultura', 'Medicina y Calidad de Vida', 'Liderazgo y Política'],
+                    datasets: [{
+                        label: 'Distribución de Áreas',
+                        data: [33.3, 33.3, 33.3],
+                        backgroundColor: brilliantBlues,
+                        borderColor: '#FFFFFF',
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        ...commonTooltipOptions.plugins,
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const fundingCtx = document.getElementById('fundingChart').getContext('2d');
+            new Chart(fundingCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Fuentes de Financiación'],
+                    datasets: [
+                        {
+                            label: 'Aportaciones Institucionales',
+                            data: [45],
+                            backgroundColor: '#0041C2',
+                        },
+                        {
+                            label: 'Patrocinios y Colaboraciones',
+                            data: [35],
+                            backgroundColor: '#0081C9',
+                        },
+                        {
+                            label: 'Ingresos del Programa (Becas/Cuotas)',
+                            data: [20],
+                            backgroundColor: '#5BC0F8',
+                        }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                            ticks: {
+                                callback: function(value) {return value + "%"}
+                            }
+                        },
+                        y: {
+                            stacked: true
+                        }
+                    },
+                     plugins: {
+                        ...commonTooltipOptions.plugins,
+                        title: {
+                            display: true,
+                            text: 'Desglose de la Estrategia de Financiación (%)',
+                            font: { size: 16 }
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            const audienceCtx = document.getElementById('audienceChart').getContext('2d');
+            new Chart(audienceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Estudiantes', 'Profesionales en Activo', wrapText('Jubilados y Comunidad')],
+                    datasets: [{
+                        label: 'Participación Estimada por Grupo',
+                        data: [40, 35, 25],
+                        backgroundColor: ['#0041C2', '#0081C9', '#5BC0F8'],
+                        borderColor: ['#003191', '#006197', '#4AB0E0'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {return value + "%"}
+                            }
+                        }
+                    },
+                    plugins: {
+                        ...commonTooltipOptions.plugins,
+                        legend: {
+                           display: false
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>

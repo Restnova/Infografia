@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA | Proyecto Puentes Culturales y de Conocimiento</title>
+    <!-- Chosen Palette: Warm Neutrals with Subtle Blues and Greens (Customized for professional harmony) -->
+    <!-- Application Structure Plan: The application is designed as a narrative journey. It starts with a strong Hero section to state the mission. It then moves to 'The Vision' using interactive cards for objectives, making them digestible. The core of the project, 'The Three Pillars', is an interactive tabbed section allowing users to explore each area without clutter. The 'Roadmap' is a visual timeline, far more intuitive than text. 'Funding' and 'Community' are visualized with charts for quick comprehension. This structure prioritizes user exploration and storytelling over the linear format of the source report, making complex information engaging and easy to navigate. -->
+    <!-- Visualization & Content Choices: 
+        - Project Pillars (Tabs): Report Info -> Program Areas. Goal -> Organize/Inform. Viz -> Interactive Tabs. Interaction -> Click to reveal details. Justification -> Prevents information overload, allows user-driven exploration. Method -> HTML/CSS/JS.
+        - Governance Diagram: Report Info -> Directorate. Goal -> Organize. Viz -> Flowchart. Interaction -> Static visual. Justification -> Clearly shows hierarchy and relationships. Method -> HTML/CSS with Tailwind.
+        - Funding Strategy: Report Info -> Funding sources. Goal -> Compare/Inform. Viz -> Stacked Bar Chart. Interaction -> Hover for details. Justification -> Shows composition of the funding strategy effectively. Library -> Chart.js (Canvas).
+        - Timeline: Report Info -> Project Phases. Goal -> Show Change/Organize. Viz -> Vertical Timeline. Interaction -> Static visual. Justification -> Intuitively displays project progression over time. Method -> HTML/CSS with Tailwind.
+        - CONFIRMING NO SVG/Mermaid. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8F9FA; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 350px; max-height: 450px; }
+        .tab-button.active { border-color: #0d6efd; color: #0d6efd; background-color: #e7f1ff; }
+        .timeline::before { content: ''; position: absolute; left: 18px; top: 0; bottom: 0; width: 4px; background: #e9ecef; border-radius: 2px; }
+        .timeline-item-dot { content: ''; position: absolute; left: 9px; top: 4px; height: 20px; width: 20px; background: #0d6efd; border-radius: 50%; border: 4px solid #F8F9FA; }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="text-gray-700">
+
+    <header id="home" class="bg-white">
+        <div class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-black text-gray-800 leading-tight">
+                Puentes Culturales y de Conocimiento
+            </h1>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+                Una iniciativa de cooperación intergeneracional entre la <strong>Universidad de Miami</strong> y <strong>España</strong>, con el aval del <strong>Consulado General de España en Miami</strong>.
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="vision" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Nuestra Visión</h2>
+                <p class="mt-3 text-md text-gray-600 max-w-2xl mx-auto">El programa busca establecer un sólido vínculo académico y cultural, fomentando el diálogo y la colaboración entre distintas generaciones y culturas para generar un impacto social positivo y duradero.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm transition-shadow hover:shadow-lg">
+                    <h3 class="font-bold text-xl mb-2 text-blue-700">Fomentar el Intercambio</h3>
+                    <p>Crear espacios donde personas de diferentes edades compartan conocimientos y perspectivas, enriqueciendo mutuamente su aprendizaje.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm transition-shadow hover:shadow-lg">
+                    <h3 class="font-bold text-xl mb-2 text-blue-700">Promover el Patrimonio</h3>
+                    <p>Difundir y celebrar el arte y la cultura española e hispanoamericana, fomentando su estudio y apreciación a través de eventos y cursos.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm transition-shadow hover:shadow-lg">
+                    <h3 class="font-bold text-xl mb-2 text-blue-700">Desarrollar Liderazgo</h3>
+                    <p>Capacitar a los participantes en pensamiento crítico, análisis político y habilidades de liderazgo para una ciudadanía activa y comprometida.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pilares" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Los Tres Pilares del Programa</h2>
+                <p class="mt-3 text-md text-gray-600 max-w-2xl mx-auto">El programa se concibe como una iniciativa multidisciplinar estructurada en tres áreas temáticas, cada una liderada por un experto reconocido. Explore cada pilar para conocer sus contenidos y metodologías.</p>
+            </div>
+            <div>
+                <div class="flex flex-wrap justify-center border-b border-gray-200 mb-8">
+                    <button class="tab-button py-2 px-6 font-semibold border-b-2 transition-colors duration-300 active" onclick="showTab(0)">🎨 Arte y Cultura</button>
+                    <button class="tab-button py-2 px-6 font-semibold border-b-2 transition-colors duration-300" onclick="showTab(1)">❤️ Medicina y Calidad de Vida</button>
+                    <button class="tab-button py-2 px-6 font-semibold border-b-2 transition-colors duration-300" onclick="showTab(2)">🏛️ Liderazgo y Política</button>
+                </div>
+                <div id="tab-content" class="bg-white p-8 rounded-lg shadow-md">
+                    <!-- Content will be injected by JS -->
+                </div>
+            </div>
+        </section>
+        
+        <section id="gobernanza" class="mb-20">
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="text-center md:text-left">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Estructura y Gobernanza</h2>
+                    <p class="mt-3 text-md text-gray-600">Una dirección clara y una colaboración estrecha son clave para el éxito. El Consulado General de España asume la dirección general, garantizando la coherencia y facilitando la conexión con instituciones, mientras que la Universidad de Miami provee el soporte académico y logístico.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                     <div class="text-center p-3 bg-blue-100 text-blue-800 font-bold rounded-md">
+                         Dirección General: Consulado de España en Miami
+                     </div>
+                     <div class="flex justify-center my-4">
+                         <div class="w-px bg-gray-300 h-8"></div>
+                     </div>
+                     <div class="text-center text-sm font-semibold text-gray-500 mb-4">EN COLABORACIÓN CON</div>
+                      <div class="flex justify-center my-4">
+                         <div class="w-px bg-gray-300 h-8"></div>
+                     </div>
+                     <div class="text-center p-3 bg-green-100 text-green-800 font-bold rounded-md">
+                         Soporte Académico: Universidad de Miami
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="calendario" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Hoja de Ruta del Proyecto</h2>
+                <p class="mt-3 text-md text-gray-600 max-w-2xl mx-auto">El proyecto se desarrollará en fases claras, desde la planificación inicial hasta su plena implementación y expansión futura, asegurando un progreso medible y sostenible.</p>
+            </div>
+            <div class="relative max-w-2xl mx-auto">
+                <div class="timeline">
+                    <div class="relative pl-12 pb-12">
+                        <div class="timeline-item-dot"></div>
+                        <p class="text-sm font-semibold text-gray-500">FASE 1: JUL-SEP 2025</p>
+                        <h4 class="text-xl font-bold mt-1">Planificación y Diseño</h4>
+                        <p class="mt-1">Formalización de acuerdos, conformación de equipos y diseño curricular detallado.</p>
+                    </div>
+                    <div class="relative pl-12 pb-12">
+                        <div class="timeline-item-dot"></div>
+                        <p class="text-sm font-semibold text-gray-500">FASE 2: OCT-NOV 2025</p>
+                        <h4 class="text-xl font-bold mt-1">Lanzamiento y Convocatoria</h4>
+                        <p class="mt-1">Presentación oficial del programa, apertura de inscripciones y selección de participantes.</p>
+                    </div>
+                    <div class="relative pl-12 pb-12">
+                        <div class="timeline-item-dot"></div>
+                        <p class="text-sm font-semibold text-gray-500">FASE 3: ENE-MAY 2026</p>
+                        <h4 class="text-xl font-bold mt-1">Implementación Piloto</h4>
+                        <p class="mt-1">Inicio de actividades académicas, con seguimiento continuo y evaluación de impacto.</p>
+                    </div>
+                    <div class="relative pl-12">
+                        <div class="timeline-item-dot"></div>
+                        <p class="text-sm font-semibold text-gray-500">FASE 4: JUN 2026 EN ADELANTE</p>
+                        <h4 class="text-xl font-bold mt-1">Evaluación y Expansión</h4>
+                        <p class="mt-1">Análisis de resultados, informe final y planificación para la consolidación y crecimiento del programa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="financiacion" class="mb-20">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Estrategia de Financiación</h2>
+                        <p class="mt-3 text-md text-gray-600">La sostenibilidad se asegura a través de un modelo de financiación diversificado. Este enfoque combina el apoyo institucional sólido con la colaboración del sector privado y la comunidad, garantizando la viabilidad y el crecimiento del programa a largo plazo.</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="fundingChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>"Puentes Culturales y de Conocimiento" - Uniendo mentes, creando futuro.</p>
+        </div>
+    </footer>
+
+    <script>
+        const tabData = [
+            {
+                director: 'DOCTOR MIGUEL GARCÍA',
+                contenido: 'Cursos, seminarios, talleres, exposiciones de arte, ciclos de cine y eventos literarios sobre la historia del arte español, literatura, música y tradiciones.',
+                metodologia: 'Clases presenciales/híbridas, visitas a instituciones culturales, debates y proyectos colaborativos.'
+            },
+            {
+                director: 'DOCTORA JOHANNA BARÓN SÁNCHEZ',
+                contenido: 'Ponencias, mesas redondas y proyectos de investigación sobre salud pública, avances médicos, nutrición, envejecimiento saludable y bienestar emocional.',
+                metodologia: 'Conferencias con especialistas, estudios de caso, talleres prácticos y desarrollo de iniciativas comunitarias.'
+            },
+            {
+                director: 'DOCTOR DAVID DIAZ BARÓN',
+                contenido: 'Análisis de sistemas políticos, diplomacia, relaciones internacionales, ética en el liderazgo y desarrollo de políticas públicas, incluyendo simulaciones y debates.',
+                metodologia: 'Seminarios interactivos, talleres de habilidades de liderazgo, análisis de coyuntura y mentorías.'
+            }
+        ];
+
+        const tabContentEl = document.getElementById('tab-content');
+        const tabButtons = document.querySelectorAll('.tab-button');
+
+        function showTab(index) {
+            const data = tabData[index];
+            tabContentEl.innerHTML = `
+                <div class="fade-in">
+                    <p class="text-sm font-semibold text-gray-500 mb-2">DIRIGIDO POR: ${data.director}</p>
+                    <h4 class="font-bold text-lg mb-2">Contenido Principal</h4>
+                    <p class="mb-4">${data.contenido}</p>
+                    <h4 class="font-bold text-lg mb-2">Metodología Aplicada</h4>
+                    <p>${data.metodologia}</p>
+                </div>
+            `;
+            tabButtons.forEach((button, i) => {
+                button.classList.toggle('active', i === index);
+            });
+        }
+
+        function wrapLabel(str) {
+            const maxLen = 16;
+            if (str.length <= maxLen) return str;
+            const words = str.split(' ');
+            let currentLine = '';
+            const lines = [];
+            for (const word of words) {
+                if (currentLine.length + word.length + 1 > maxLen) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        }
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            return Array.isArray(label) ? label.join(' ') : label;
+        };
+
+        const commonTooltipOptions = {
+            plugins: {
+                tooltip: {
+                    callbacks: { title: tooltipTitleCallback },
+                    backgroundColor: '#000',
+                    titleFont: { size: 14, weight: 'bold' },
+                    bodyFont: { size: 12 },
+                    padding: 10,
+                    cornerRadius: 4
+                }
+            }
+        };
+
+        window.onload = function() {
+            showTab(0); 
+
+            const fundingCtx = document.getElementById('fundingChart').getContext('2d');
+            new Chart(fundingCtx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        wrapLabel('Aportaciones Institucionales Directas'),
+                        wrapLabel('Patrocinios y Colaboraciones Privadas'),
+                        wrapLabel('Becas, Ayudas y Cuotas')
+                    ],
+                    datasets: [{
+                        label: 'Estrategia de Financiación',
+                        data: [45, 35, 20],
+                        backgroundColor: ['#0d6efd', '#6c757d', '#198754'],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: { display: false },
+                             ticks: { callback: (value) => value + '%' }
+                        },
+                        y: { grid: { display: false } }
+                    },
+                    plugins: {
+                        ...commonTooltipOptions.plugins,
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Distribución de Fuentes de Financiación (%)',
+                            font: { size: 16 }
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
+```
